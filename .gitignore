@@ -1,2 +1,10 @@
 # Specific files
 [0-9]*.pdf
+*.docx
+
+# Specific directories
+Resources/
+
+# Non relevant sessions
+Activities/Session 03*
+
