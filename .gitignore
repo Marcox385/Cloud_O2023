@@ -1,6 +1,10 @@
 # Specific files
 [0-9]*.pdf
 *.docx
+*.pem
+*.ppk
+*.rdp
+windows-values*
 
 # Specific directories
 Resources/
