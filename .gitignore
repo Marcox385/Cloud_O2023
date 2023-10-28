@@ -5,6 +5,8 @@
 *.ppk
 *.rdp
 windows-values*
+credentials
+**/L08/**/*.jp*g
 
 # Specific directories
 Resources/
