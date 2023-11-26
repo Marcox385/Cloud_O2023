@@ -1,9 +1,9 @@
 '''
     IS72727 - Cordero Hernández, Marco Ricardo
     Cloud Architecture Project
-    URL Shortener
+    URL Shortener full service
 '''
-import re
+import json
 from random import random, choice
 from string import ascii_lowercase, ascii_letters
 nums = list(map(str, range(10)))
@@ -17,26 +17,13 @@ def getRandBits(length: int = 2) -> str:
 
     return ''.join(bits)
 
-def removeHead(url: str) -> str:
-    ''' Remove protocol and www from url '''
-    pattern = r'^(?:http[s]?:\/{2})?(.*?\.)(.*)$'
-    search = re.search(pattern, url)
-
-    if (search):
-        if (search.group(1).startswith('http')):
-            return ''
-
-        if (search.group(1) == 'www.'):
-            return search.group(2)
-        return ''.join(search.groups())
-    return
-
 def shortener(url: str, short_length: int = 10) -> str:
-    ''' Shorten url '''
-    if (len(url) > 200 or not (url := removeHead(url))): # Invalid URL or too long
+    ''' Main driver 
+        URL should be received in headless form (no http[s]://www)
+    '''
+    if (len(url) > 200): # URL too long
         return ''
     
-    print(url)
     i = 0
     short_url = ''
     order = True if (int(random()*10) % 2 == 0) else False
@@ -56,11 +43,24 @@ def shortener(url: str, short_length: int = 10) -> str:
     
     return short_url + getRandBits(length=short_length-len(short_url))
 
-# def urlShortener()
-
-if __name__ == '__main__':
-    # TODO: Consider handling url length and format outside shortener function
-    #       as the current system it's confusing
+def lambda_handler(event, context):
+    if  ('url' not in event.keys()):
+        return {
+            'statusCode': 400,
+            'body': json.dumps('URL not provided')
+        }
     
-    test = 'https://iteso.instructure.com/courses/32932'
-    print(shortener(test))
+    if (len(event.keys()) > 1):
+        return {
+            'statusCode': 400,
+            'body': json.dumps('Provide only URL param')
+        }
+    
+    short_url = shortener(event['url'])
+    
+    response = {'short_url': short_url}
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps(response)
+    }

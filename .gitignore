@@ -12,6 +12,7 @@ credentials
 # Specific directories
 Resources/
 node_modules/
+libs/
 
 # Non relevant sessions
 Activities/Session 03*
