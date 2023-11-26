@@ -1,6 +1,7 @@
 # Specific files
 [0-9]*.pdf
 *.docx
+*.env
 *.pem
 *.ppk
 *.rdp
@@ -10,6 +11,7 @@ credentials
 
 # Specific directories
 Resources/
+node_modules/
 
 # Non relevant sessions
 Activities/Session 03*
