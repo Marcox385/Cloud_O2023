@@ -24,3 +24,6 @@ FROM shortened_urls;
 UPDATE shortened_urls
 SET count = count + 1
 WHERE hash = '';
+
+-- Test delete (apply to remove all test entries)
+DELETE FROM shortened_urls;
