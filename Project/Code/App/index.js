@@ -153,9 +153,9 @@ app.get('/:short_form', (req, res) => {
                     non_shorter: true,
                     reason: 'URL not yet shortened'
                 });
-        
+                
             // Redirect to destination first
-            res.redirect(`//${original_url}`);
+            res.redirect(`//${results[0].original_url}`);
             
             // Update metrics
             hash_key = results[0].hash;

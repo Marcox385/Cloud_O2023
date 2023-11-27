@@ -5,6 +5,7 @@
 *.pem
 *.ppk
 *.rdp
+*.zip
 windows-values*
 credentials
 **/L08/**/*.jp*g
